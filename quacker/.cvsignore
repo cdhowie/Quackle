@@ -1,0 +1,10 @@
+Makefile
+moc
+obj
+quacker
+Makefile.Debug
+Makefile.Release
+debug
+release
+object_script.quacker.Debug
+object_script.quacker.Release

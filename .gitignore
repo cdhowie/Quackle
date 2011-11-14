@@ -1,0 +1,10 @@
+.sconsign
+obj
+Makefile
+Makefile.Debug
+Makefile.Release
+debug
+object_script.libquackle.Debug
+object_script.libquackle.Release
+release
+ChangeLog

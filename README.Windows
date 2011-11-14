@@ -1,0 +1,77 @@
+See README for further details about Quackle, its licensing, and its
+copyright.
+
+Quackle was first ported to Windows by John Fultz, jfultz@wolfram.com, who
+is also the original author of this ReadMe.
+
+All of the tools to build the Windows version are available freely on the
+web and are easy to find using Google.  Some tools, however, may only
+work properly under Windows 2000 or later (I don't know of any
+incompatibilities, but I suspect there may be some).  All build commands
+are run from Windows' regular command shell.  The tools are:
+
+Mandatory:
+------------------------------------
+MinGW (I used 5.1.4 in Quackle 0.96)
+Qt 4.3.x (I used 4.3.5 in Quackle 0.96)
+CVS (you may elect to use the cvs available in cygwin, but see the note below)
+
+Optional:
+------------------------------------
+cygwin       - if you want to debug, you'll need gdb from cygwin.  I
+               recommend installing it with DOS newline support,
+               not Unix newline support (especially if you use cygwin's
+               cvs client).
+Inno Setup 5 - required to build the installable image target
+
+
+Also, you'll need to make sure the following things are set appropriately
+in your environment...
+
+* INCLUDE needs to include Qt's include\ directory
+* LIB needs to include Qt's lib\ directory
+* PATH needs to include MinGW's bin\ directory and Qt's bin/ directory.
+* cygwin's bin directory (if present) should be on PATH, and it must
+  be after MinGW.
+
+
+Building is very straightforward.  The following steps will get you to a
+working executable...
+
+* Check out or update the quackle development directory using cvs.
+
+* In the directories quackle\, quackle\quackleio, and quackle\quacker,
+  do the following...
+  	qmake
+  	mingw32-make <target>
+ <target> can be debug, release, or empty if you want to build both.
+
+* You can now run quackle\quacker\release\quacker.exe
+
+
+Additional things to know:
+--------------------------
+* To build the Quackle installer,
+  + Copy mingwm10.dll from MinGW's bin\ directory into quackle\
+  + Copy QtCore4.dl and QtGui4.dll from Qt's bin/ directory into quackle\
+  + From the Quackle directory, run the following...
+    <full path to Inno Setup's ISCC.exe> installer.iss /FQuackleInstaller /O. /Q
+  + Find the file QuackleInstaller.exe in the quackle\ directory.
+
+* MinGW doesn't seem to come with a debugger, but the cygwin gdb
+  seems to work great on MinGW-generated binaries.  Watch for
+  conflicts between MinGW and cygwin if both are on the path at
+  once, though.
+
+
+Building Qt libraries
+---------------------
+  You can download the mingw version of the prebuilt Qt libraries,
+  but I just build my own.  To do so, download
+  qt-win-opensource-src-<ver>.zip
+  from Trolltech or a mirror.  Unpack it someplace.  Set your
+  PATH so that it contains the MinGW's and Qt's bin directories.
+  If you have cygwin installed, make sure that you do *not* have
+  it on your PATH.  Then run 'configure debug-and-release' (or
+  whatever versions you prefer), and then run mingw32-make.
+  
